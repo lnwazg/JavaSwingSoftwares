@@ -1,5 +1,5 @@
 # JavaSwingSoftwares
-一系列基于Java Swing编写的桌面应用，开箱即用，方便快捷。  
+这是我自己编写的一系列基于Java Swing的桌面应用，开箱即用，简单便捷。  
 请注意，使用前需要安装JDK8运行环境。  
 JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html   
 若有疑问或建议，请邮件我，我的邮箱是:  lnwazg@126.com  
