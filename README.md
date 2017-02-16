@@ -1,6 +1,9 @@
 # JavaSwingSoftwares
-这是我自己编写的一系列基于Java Swing的桌面应用，开箱即用，简单便捷。  
-请注意，使用前需要安装JDK8运行环境。  
+以下我自己编写的一系列基于Java Swing的桌面应用，开箱即用，简单便捷。  
+编写这些软件的初衷，是为了让我所掌握的Java技术更好地服务于我的工作与生活。  
+当我发现，使用swing也可以绘制出漂亮且高效的桌面应用时，我开启了新世界！  
+  
+请注意，使用这些软件的前提是要安装JDK8运行环境。  
 JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html   
 若有疑问或建议，请邮件我，我的联系方式如下：  
 
@@ -24,7 +27,17 @@ QQ：  914096874
 8. 打开https://www.youtube.com/ 检测一下你是否可以正常翻墙。如果可以正常打开，说明已经翻墙成功了，have fun！  
  <img src="screenshots/5.png">   
 
-## 2. CACHE_SERVER  纯java的类redis缓存服务器  
+## 2. GoogleTranslate  惊鸿一瞥 背单词神器
+运行截图如下：  
+![xxx](screenshots/22.png)
+![xxx](screenshots/23.png)
+![xxx](screenshots/21.png)
+
+下载GoogleTranslate-1.3.3.jar，双击运行即可。
+另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
+
+
+## 3. CACHE_SERVER  纯java的类redis缓存服务器  
 这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
 运行截图如下：  
 ![xxx](screenshots/11.png)
