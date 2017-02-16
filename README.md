@@ -2,8 +2,9 @@
 这是我自己编写的一系列基于Java Swing的桌面应用，开箱即用，简单便捷。  
 请注意，使用前需要安装JDK8运行环境。  
 JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html   
-若有疑问或建议，请邮件我，我的邮箱是:  lnwazg@126.com  
-QQ： 914096874  
+若有疑问或建议，请邮件我，我的联系方式如下：  
+邮箱: lnwazg@126.com  
+QQ：  914096874  
 
 ## 1. AutoShadow 基于java swing的翻墙工具
 这款小工具可以帮助你有效地翻墙。软件运行截图如下:  
