@@ -21,4 +21,23 @@ JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads
 8. 打开https://www.youtube.com/ 检测一下你是否可以正常翻墙。如果可以正常打开，说明已经翻墙成功了，have fun！  
  <img src="screenshots/5.png">   
 
-## 2.
+## 2. CACHE_SERVER  纯java的类redis缓存服务器  
+这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
+运行截图如下：  
+![xxx](screenshots/11.png)
+
+提供的基本功能：  
+put(Serializable key, Serializable value)     将任意键值对放入到redis缓存   
+get(Serializable key, Class<T> classType)     根据key取出相对应的缓存对象，并将结果转换为指定的类型  
+get(Serializable key)                         根据key取出相对应的缓存对象                
+remove(Serializable key)                      移除掉某个key  
+incr(Serializable key)						  将某个key对应的对象的值+1  
+decr(Serializable key)                        将某个key对应的对象的值-1  
+
+
+
+
+
+
+
+
