@@ -36,9 +36,14 @@ QQ：  914096874
 下载GoogleTranslate-1.3.3.jar，双击运行即可。
 另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
+## 3. MY_ZOO_SERVER  我的zookeeper服务器
+通信层基于kryonet，功能仿造zookeeper，但是更加可视化、实用化。  
+提供了命名服务、服务注册、服务卸载、下线检测等功能。
+![xxx](screenshots/41.png)
 
-## 3. CACHE_SERVER  纯java的类redis缓存服务器  
+## 4. CACHE_SERVER  纯java的类redis缓存服务器  
 这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
+可以和MY_ZOO_SERVER进行集成，通用命名服务进行访问，所有的配置信息都由MY_ZOO_SERVER统一管理，高效可视化。  
 运行截图如下：  
 ![xxx](screenshots/11.png)
 
@@ -49,6 +54,8 @@ get(Serializable key)                         根据key取出相对应的缓存�
 remove(Serializable key)                      移除掉某个key  
 incr(Serializable key)						  将某个key对应的对象的值+1  
 decr(Serializable key)                        将某个key对应的对象的值-1  
+
+代码示例：
 
 
 
