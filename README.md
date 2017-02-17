@@ -7,8 +7,9 @@
 JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html   
 若有疑问或建议，请邮件我，我的联系方式如下：  
 
-邮箱: lnwazg@126.com  
 QQ：  914096874  
+邮箱: lnwazg@126.com  
+
 
 ## 1. AutoShadow 基于java swing的翻墙工具
 这款小工具可以帮助你有效地翻墙。软件运行截图如下:  
@@ -28,6 +29,12 @@ QQ：  914096874
  <img src="screenshots/5.png">   
 
 ## 2. GoogleTranslate  惊鸿一瞥 背单词神器
+软件特色：  
+1. 内置艾宾浩斯记忆曲线，高效有趣地背单词  
+2. 快捷键PrintScreen一键呼出\关闭  
+3. 中翻英、英翻中、独家配备精美单词插图解释，可视化的记忆，高效自然  
+4. 智能发音、等级称号成就系统，越用你的英文水平就越强大
+
 运行截图如下：  
 ![xxx](screenshots/22.png)
 ![xxx](screenshots/23.png)
@@ -37,8 +44,10 @@ QQ：  914096874
 另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
 ## 3. MY_ZOO_SERVER  我的zookeeper服务器
-通信层基于kryonet，功能仿造zookeeper，但是更加可视化、实用化。  
-提供了命名服务、服务注册、服务卸载、下线检测等功能。
+通信层基于kryonet，功能高仿zookeeper，但是更加可视化、实用化。  
+提供了命名服务、服务注册、服务卸载、智能下线检测等功能。  
+服务信息在服务上线时自动注册，服务下线时自动解除注册。  
+也可以根据自己的需要手动调整在线服务的注册信息。  
 ![xxx](screenshots/41.png)
 
 ## 4. CACHE_SERVER  纯java的类redis缓存服务器  
@@ -55,7 +64,18 @@ remove(Serializable key)                      移除掉某个key
 incr(Serializable key)						  将某个key对应的对象的值+1  
 decr(Serializable key)                        将某个key对应的对象的值-1  
 
+#####配合MY_ZOO_SERVER，运行状态如下：  
+服务开启前状态：  
+![xxx](screenshots/12.png)
+服务开启后状态： 
+![xxx](screenshots/13.png)
+
+通过以上的状态对比，我们就能明白MY_ZOO_SERVER的设计思想及其可视化效果的优势以及特色。
+
+
 代码示例：
+
+
 
 
 
