@@ -52,9 +52,7 @@ QQ：  914096874
 
 ## 4. CACHE_SERVER  纯java的类redis缓存服务器  
 这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
-可以和MY_ZOO_SERVER进行集成，通用命名服务进行访问，所有的配置信息都由MY_ZOO_SERVER统一管理，高效可视化。  
-运行截图如下：  
-![xxx](screenshots/11.png)
+可以和MY_ZOO_SERVER进行集成，通用命名服务进行访问，所有的配置信息都由MY_ZOO_SERVER统一管理，高效可视化。
 
 提供的基本功能：  
 put(Serializable key, Serializable value)     将任意键值对放入到redis缓存   
@@ -62,9 +60,12 @@ get(Serializable key, Class<T> classType)     根据key取出相对应的缓存�
 get(Serializable key)                         根据key取出相对应的缓存对象                
 remove(Serializable key)                      移除掉某个key  
 incr(Serializable key)						  将某个key对应的对象的值+1  
-decr(Serializable key)                        将某个key对应的对象的值-1  
+decr(Serializable key)                        将某个key对应的对象的值-1    
 
-#####配合MY_ZOO_SERVER，运行状态如下：  
+##### 脱离MY_ZOO_SERVER单独运行的截图如下：  
+![xxx](screenshots/11.png)
+
+##### 配合MY_ZOO_SERVER，运行状态如下：  
 服务开启前状态：  
 ![xxx](screenshots/12.png)
 服务开启后状态： 
@@ -73,7 +74,8 @@ decr(Serializable key)                        将某个key对应的对象的值-
 通过以上的状态对比，我们就能明白MY_ZOO_SERVER的设计思想及其可视化效果的优势以及特色。
 
 
-代码示例：
+CACHE_SERVER配合MY_ZOO_SERVER使用的代码示例：  
+
 
 
 
