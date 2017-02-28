@@ -77,6 +77,134 @@ decr(Serializable key)                        将某个key对应的对象的值-
 
 CACHE_SERVER配合MY_ZOO_SERVER使用的代码示例：  
 
+```
+
+package com.lnwazg.component.demo;
+
+import java.util.Map;
+
+import com.lnwazg.cache.client.RemoteCacheServer;
+import com.lnwazg.cache.proxy.Cache;
+import com.lnwazg.kit.log.Logs;
+import com.lnwazg.kit.testframework.TF;
+import com.lnwazg.kit.testframework.anno.PrepareStartOnce;
+import com.lnwazg.kit.testframework.anno.TestCase;
+import com.lnwazg.myzoo.framework.MyZooKeeper;
+
+/**
+ * 我的缓存服务器，使用demo
+ * @author nan.li
+ * @version 2017年2月28日
+ */
+public class MyCacheServerDemo
+{
+    Cache cache = null;
+    
+    /**
+     * 初始化测试环境
+     * @author nan.li
+     */
+    @PrepareStartOnce
+    void prepareGlobalOnlyOnce()
+    {
+        boolean success = MyZooKeeper.initDefaultConfig();
+        if (success)
+        {
+            Map<String, String> m = MyZooKeeper.queryServiceConfigByNodeNameStartWithThenChooseOne("remoteCache");
+            //初始化redis服务器
+            cache = RemoteCacheServer.initConfig(m.get("server"), Integer.valueOf(m.get("port")));
+        }
+        else
+        {
+            Logs.e("MyZooKeeper集群初始化失败！");
+        }
+    }
+    
+    /**
+     * 存任意对象
+     * @author nan.li
+     */
+    //    @TestCase
+    void testSave()
+    {
+        //存
+        cache.put(5, 100.78D);
+        cache.put(5, 100.746348965893486948d);
+    }
+    
+    /**
+     * 存一个整数
+     * @author nan.li
+     */
+    //          @TestCase
+    void testSaveInteger()
+    {
+        //存
+        cache.put(5, 200);
+    }
+    
+    /**
+     * 执行“+1”操作
+     * @author nan.li
+     */
+    @TestCase
+    void testIncrement()
+    {
+        cache.incr(5);
+    }
+    
+    /**
+     * 获取某个key所存储的对象
+     * @author nan.li
+     */
+    @TestCase
+    void testGet()
+    {
+        //取
+        System.out.println(cache.get(5));
+    }
+    
+    public static void main(String[] args)
+    {
+        TF.l(MyCacheServerDemo.class);
+    }
+}
+
+
+```
+输出的日志如下：  
+
+```
+>>>>>>>>>>>>>>>>>>>>>  开始全局准备  >>>>>>>>>>>>>>>>>>>>>>>
+>>>执行@PrepareStartOnce方法： prepareGlobalOnlyOnce  >>>
+00:00  INFO: [kryonet] Connecting: myzoo.lnwazg.com/127.0.0.1:54555
+00:00  INFO: [kryonet] Connection 20 connected: myzoo.lnwazg.com/127.0.0.1
+[I] 已成功连接MyZooKeeper服务器！
+[I] 客户端收到 msg:com.lnwazg.myzoo.bean.Msg@dd3ad49[
+  token=3yrXsjD3XZEbKrqywqLQMvDujtYK1YFXBs4jTcalwmldhHve6Q9CV18TpMukHHMa
+  path=/client/queryServiceConfigByNodeNameStartWithResult
+  map=<null>
+  list=[{node=remoteCache-4a637900d525d2e69b8c92bb6debdcfc, server=10.10.10.10, port=3333, group=remoteCache}]
+  obj=<null>
+]
+
+[I] 读取到MyZooKeeper配置信息列表:[{node=remoteCache-4a637900d525d2e69b8c92bb6debdcfc, server=10.10.10.10, port=3333, group=remoteCache}]
+[I] 列表总计1条数据，随机挑选出的第0条MyZooKeeper配置信息:{node=remoteCache-4a637900d525d2e69b8c92bb6debdcfc, server=10.10.10.10, port=3333, group=remoteCache}
+【测试共计耗时 343 毫秒】
+<<<<<<<<<<<<<<<<<<<<<  全局准备结束！   <<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>  开始测试方法： testIncrement  >>>>>>>>>>>>>>>>>>>>>>>
+
+【测试共计耗时 42 毫秒】
+<<<<<<<<<<<<<<<<<<<<<  testIncrement 方法测试结束！   <<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>  开始测试方法： testGet  >>>>>>>>>>>>>>>>>>>>>>>
+206
+【测试共计耗时 1 毫秒】
+<<<<<<<<<<<<<<<<<<<<<  testGet 方法测试结束！   <<<<<<<<<<<<<<<<<<<<<<<
+
+```
+
 
 
 ## 5.MQ_SERVER  我的消息服务器  
