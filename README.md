@@ -209,7 +209,6 @@ public class MyCacheServerDemo
 与我们的设想的结果一致，运行成功。   
 
 
-
 ## 5.MQ_SERVER  我的消息服务器  
 ##### 特色：   
 1. 便携性强，便于部署，端口可随便切换   
@@ -222,6 +221,198 @@ public class MyCacheServerDemo
 
 #####与MY_ZOO_SERVER集成后，启动后的截图如下：  
 ![](screenshots/51.png)
+
+测试代码如下：  
+```
+package com.lnwazg.component.demo;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.lnwazg.kit.executor.ExecMgr;
+import com.lnwazg.kit.list.Lists;
+import com.lnwazg.kit.log.Logs;
+import com.lnwazg.kit.testframework.TF;
+import com.lnwazg.kit.testframework.anno.PrepareStartOnce;
+import com.lnwazg.kit.testframework.anno.TestCase;
+import com.lnwazg.mq.framework.MQConfig;
+import com.lnwazg.mq.framework.MQFramework;
+import com.lnwazg.mq.util.MQHelper;
+import com.lnwazg.myzoo.framework.MyZooKeeper;
+
+/**
+ * MyMq测试demo
+ * @author nan.li
+ * @version 2017年2月28日
+ */
+public class MqDemo
+{
+    /**
+     * 初始化测试环境
+     * @author nan.li
+     */
+    @PrepareStartOnce
+    void prepareGlobalOnlyOnce()
+    {
+        boolean success = MyZooKeeper.initDefaultConfig();
+        if (success)
+        {
+        }
+        else
+        {
+            Logs.e("MyZooKeeper集群初始化失败！");
+        }
+    }
+    
+    /**
+     * 初始化单个节点mq
+     * @author nan.li
+     */
+    //    @TestCase
+    void initSingleMQ()
+    {
+        Map<String, String> m = MyZooKeeper.queryServiceConfigByNodeNameStartWithThenChooseOne("mq");
+        boolean result = MQConfig.initMq(m.get("server"), Integer.valueOf(m.get("port")), "demoWeb", "demoWeb");
+        if (result)
+        {
+            Logs.i("单点MQ初始化成功！");
+        }
+    }
+    
+    /**
+     * 初始化mq集群
+     * @author nan.li
+     */
+    @TestCase
+    void initClusterMQ()
+    {
+        List<Map<String, String>> list = MyZooKeeper.queryServiceConfigByNodeNameStartWith("mq");
+        String clusterConfigInfo = "";
+        if (Lists.isNotEmpty(list))
+        {
+            clusterConfigInfo = list.stream().map(m -> String.format("%s:%s", m.get("server"), m.get("port"))).collect(Collectors.joining(","));
+        }
+        boolean result = MQConfig.initMqCluster(clusterConfigInfo, "demoWeb", "demoWeb");
+        if (result)
+        {
+            Logs.i("MQ集群初始化成功！");
+        }
+    }
+    
+    /**
+     * 定期发送MQ消息到指定的mq收件者
+     * @author nan.li
+     */
+    //    @TestCase
+    void sendMsgToMq()
+    {
+        String targetNode = "demoWeb";
+        String meNode = "ccc";
+        MQFramework.myselfAddress = meNode;//指定你的地址
+        //模拟每秒钟买1000注“一元夺宝”
+        //每秒钟发送1000注夺宝信息给mq服务器进行处理
+        ExecMgr.scheduledExec.scheduleAtFixedRate(new Runnable()
+        {
+            public void run()
+            {
+                for (int i = 0; i < 10000; i++)
+                {
+                    MQHelper.sendAsyncMsg(targetNode, "/inbox/choujiang", "buyNums", generateBuyNums());
+                }
+            }
+            
+        }, 0, 1, TimeUnit.SECONDS);
+    }
+    
+    /**
+     * 生成购买彩票数值
+     * @author nan.li
+     * @return
+     */
+    private String generateBuyNums()
+    {
+        //随机买1到3000注
+        int buyCount = RandomUtils.nextInt(2994, 2995);
+        //1-5998元
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < 5998; i++)
+        {
+            list.add(i + 1);
+        }
+        List<Integer> ll = new LinkedList<>();
+        for (int i = 0; i < buyCount; i++)
+        {
+            ll.add(list.remove(RandomUtils.nextInt(0, list.size())));
+        }
+        return StringUtils.join(ll.toArray(new Integer[ll.size()]), ",");
+    }
+    
+    public static void main(String[] args)
+    {
+        TF.l(MqDemo.class);
+    }
+    
+}
+
+```
+
+运行日志如下：   
+```
+>>>>>>>>>>>>>>>>>>>>>  开始全局准备  >>>>>>>>>>>>>>>>>>>>>>>
+>>>执行@PrepareStartOnce方法： prepareGlobalOnlyOnce  >>>
+00:00  INFO: [kryonet] Connecting: myzoo.lnwazg.com/127.0.0.1:54555
+00:00  INFO: [kryonet] Connection 23 connected: myzoo.lnwazg.com/127.0.0.1
+[I] 已成功连接MyZooKeeper服务器！
+【测试共计耗时 196 毫秒】
+<<<<<<<<<<<<<<<<<<<<<  全局准备结束！   <<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>  开始测试方法： initClusterMQ  >>>>>>>>>>>>>>>>>>>>>>>
+[I] 客户端收到 msg:com.lnwazg.myzoo.bean.Msg@3929bece[
+  token=QCiCmdinzRiX7rqKTKHoD6H7hXtBXi64S1DQnRDe4ByaZJEac6D87kVmvMAKFAs6
+  path=/client/queryServiceConfigByNodeNameStartWithResult
+  map=<null>
+  list=[{node=mq-76bbe906731d77da06b92c741d184564, server=10.10.10.10, port=11111, group=mq}, {node=mq-57748ad652751ebaf457d80a90cd81b8, server=10.10.10.10, port=1210, group=mq}]
+  obj=<null>
+]
+
+[I] 读取到MyZooKeeper配置信息列表:[{node=mq-76bbe906731d77da06b92c741d184564, server=10.10.10.10, port=11111, group=mq}, {node=mq-57748ad652751ebaf457d80a90cd81b8, server=10.10.10.10, port=1210, group=mq}]
+
+第1条数据：
+(10.10.10.10,11111)
+第2条数据：
+(10.10.10.10,1210)
+[I] MQ集群初始化成功！
+【测试共计耗时 97 毫秒】
+<<<<<<<<<<<<<<<<<<<<<  initClusterMQ 方法测试结束！   <<<<<<<<<<<<<<<<<<<<<<<
+
+[I] 正在使用集群单元:tcp://10.10.10.10:1210
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/D:/maven/repo/m2/ch/qos/logback/logback-classic/1.1.7/logback-classic-1.1.7.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/D:/maven/repo/m2/org/slf4j/slf4j-simple/1.7.21/slf4j-simple-1.7.21.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+[I] 读取到证书信息，更新通讯秘钥...
+[I] 当前的通讯密码为：d1335d06d5319cd2
+[I] 本次总计减少传输量-53字节
+[I] MqRequest cost 148 ms
+[I] 订阅频道的消息为空！
+[I] 消息池空了，休眠指定的间隔时间后再试...
+[I] 正在使用集群单元:tcp://10.10.10.10:11111
+[I] 本次总计减少传输量-53字节
+[I] MqRequest cost 3 ms
+[I] 订阅频道的消息为空！
+[I] 消息池空了，休眠指定的间隔时间后再试...
+
+```
+
+运行过程的服务器截图如下：  
+![](screenshots/52.png)
 
 
 
