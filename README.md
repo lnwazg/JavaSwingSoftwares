@@ -70,13 +70,18 @@ redis的设计思想决定了其运行需要占用大量的内存。那么，是
 这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
 可以和MY_ZOO_SERVER进行集成，通用命名服务进行访问，所有的配置信息都由MY_ZOO_SERVER统一管理，高效可视化。  
 
+### New！
+现提供多租户支持功能！启动客户端时，可以指定业务Id，那么所有的操作都将在该业务Id内执行，多个业务Id之间的数据互相隔离。  
+初始化的方法如下：    
+cache = RemoteCacheServer.initConfig(m.get("server"), Integer.valueOf(m.get("port")), "yourBusinessId");
+
 ### 提供的基本功能如下：
 put(Serializable key, Serializable value)     将任意键值对放入到redis缓存   
 get(Serializable key, Class<T> classType)     根据key取出相对应的缓存对象，并将结果转换为指定的类型  
 get(Serializable key)                         根据key取出相对应的缓存对象                
 remove(Serializable key)                      移除掉某个key  
 incr(Serializable key)						  将某个key对应的对象的值+1  
-decr(Serializable key)                        将某个key对应的对象的值-1    
+decr(Serializable key)                        将某个key对应的对象的值-1      
 
 ##### 脱离MY_ZOO_SERVER单独运行的截图如下：  
 ![xxx](screenshots/11.png)
