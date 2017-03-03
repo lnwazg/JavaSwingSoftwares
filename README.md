@@ -45,6 +45,14 @@ QQ：  914096874
 另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
 ## 3. MY_ZOO_SERVER  我的zookeeper服务器
+### 诞生初衷：
+原本我是想用Java复刻zookeeper，但是复刻的难度太大，随后发现复刻zookeeper的Naming Service功能更加简单易实施。    
+Naming Service的原理并不复杂，但是提供一个简单好用的Naming Service中间件依然是一件颇具挑战的事情。  
+
+### 解决方案：
+依然是采用我最擅长的SwingXml组件作为桌面软件的展示层，底层采用kryonet作为通信层，实现Naming Service的原理即可。
+
+### 软件介绍：
 通信层基于kryonet，功能高仿zookeeper，但是更加可视化、实用化。  
 提供了命名服务、服务注册、服务卸载、智能下线检测等功能。  
 服务信息在服务上线时自动注册，服务下线时自动解除注册。  
@@ -52,17 +60,17 @@ QQ：  914096874
 ![xxx](screenshots/41.png)
 
 ## 4. CACHE_SERVER  纯java的类redis缓存服务器  
-### 诞生初衷：    
+### 诞生初衷：
 redis的设计思想决定了其运行需要占用大量的内存。那么，是否可能有这样的一款软件，提供网络访问接口，能够提供近似于redis的使用体验，却又无须占用大量的内存，可以部署在任意低内存的机器上，并且还可以存储海量的数据？  
 
-### 解决方案：  
+### 解决方案：
 使用ehcache + rmi + JDK serialization进行组合，即可实现提供以上的功能。  
 
-### 特色：  
+### 特色：
 这款缓存服务器可以让你方便地存储任意的键值对到本地磁盘中，api高仿redis，使用轻巧方便，可以自定义端口号，双击即可使用。  
 可以和MY_ZOO_SERVER进行集成，通用命名服务进行访问，所有的配置信息都由MY_ZOO_SERVER统一管理，高效可视化。  
 
-### 提供的基本功能如下：  
+### 提供的基本功能如下：
 put(Serializable key, Serializable value)     将任意键值对放入到redis缓存   
 get(Serializable key, Class<T> classType)     根据key取出相对应的缓存对象，并将结果转换为指定的类型  
 get(Serializable key)                         根据key取出相对应的缓存对象                
