@@ -75,6 +75,21 @@ redis的设计思想决定了其运行需要占用大量的内存。那么，是
 初始化的方法如下：    
 cache = RemoteCacheServer.initConfig(m.get("server"), Integer.valueOf(m.get("port")), "yourBusinessId");
 
+### 性能测试：
+命令行输入```java -Xmx12000m -jar CACHE_SERVER-1.1.jar ```启动服务，为服务分配11.7G的虚拟机内存，开始测试。    
+循环插入1000w个User（id,name,address,sex）对象，占用7.9G内存，依然留有3G的可用堆空间。  
+此时本地的ehcache缓存数据文件“my_cache_server_PortNum.data”占用了6.14G。  
+循环查询1000w次，总计耗时3055.6秒，约合50.9分钟，平均每次运行耗时0.3055603 毫秒，方法调用速度为 3272.68 次/秒 (TPS)。   
+实际使用下，1000w数据量的前提下，读写速度均可以稳定达到3000次/秒。   
+
+####总结一下CACHE_SERVER的优势：
+1. 底层因为是基于ehcache的，因此相对于redis， CACHE_SERVER可用存入任意的实现了Serializable接口的对象，没有redis的那么多的数据结构上的约束。CACHE_SERVER真正实现了千万级任意对象的远程有效存取！  
+2. CACHE_SERVER底层完全基于Java，因此可以充分利用Java生态的全部优势，例如自定义多租户功能！  
+3. CACHE_SERVER没有单线程问题，可以充分利用多核cpu加速查询，ehcache的优势就是CACHE_SERVER的优势！  
+4. 基于现有api的无限扩展，例如实现批量查询接口、批量插入接口等等，增加运行速度优势。  
+5. 无须繁琐的参数调优，开箱即可用。只需要注意：每100w条数据对应1G的堆内存的计算公式即可！  
+  
+
 ### 提供的基本功能如下：
 put(Serializable key, Serializable value)     将任意键值对放入到redis缓存   
 get(Serializable key, Class<T> classType)     根据key取出相对应的缓存对象，并将结果转换为指定的类型  
