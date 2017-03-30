@@ -12,7 +12,8 @@ QQ：  914096874
 
 
 ## 1. AutoShadow 基于java swing的翻墙工具
-这款小工具可以帮助你有效地翻墙。软件运行截图如下:  
+这款小工具可以帮助你有效地翻墙，纯公益目的，仅供广大开发人员方便地查阅英文文献，请勿用于商业用途。  
+软件运行截图如下:  
 <img src="screenshots/1.png">
 
 ### 使用步骤：  
@@ -81,7 +82,7 @@ cache = RemoteCacheServer.initConfig(m.get("server"), Integer.valueOf(m.get("por
 循环查询1000w次，总计耗时3055.6秒，约合50.9分钟，平均每次运行耗时0.3055603 毫秒，方法调用速度为 3272.68 次/秒 (TPS)。   
 实际使用下，1000w数据量的前提下，读写速度均可以稳定达到3000次/秒。   
 
-####总结一下CACHE_SERVER的优势：
+#### 总结一下CACHE_SERVER的优势：
 1. 底层因为是基于ehcache的，因此相对于redis， CACHE_SERVER可用存入任意的实现了Serializable接口的对象，没有redis的那么多的数据结构上的约束。CACHE_SERVER真正实现了千万级任意对象的远程有效存取！  
 2. CACHE_SERVER底层完全基于Java，因此可以充分利用Java生态的全部优势，例如自定义多租户功能！  
 3. CACHE_SERVER没有单线程问题，可以充分利用多核cpu加速查询，ehcache的优势就是CACHE_SERVER的优势！  
@@ -253,7 +254,7 @@ public class MyCacheServerDemo
 6. 消息发送与接收的运行过程可视化。  
 
 
-#####与MY_ZOO_SERVER集成后，启动后的截图如下：  
+##### 与MY_ZOO_SERVER集成后，启动后的截图如下：  
 ![](screenshots/51.png)
 
 测试代码如下：  
