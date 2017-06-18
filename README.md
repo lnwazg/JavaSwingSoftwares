@@ -23,7 +23,7 @@ QQ：  914096874
 ![xxx](screenshots/23.png)
 ![xxx](screenshots/21.png)
 
-下载GoogleTranslate-1.3.3.jar，双击运行即可。
+下载GDict-1.0.jar，双击运行即可。
 另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
 
