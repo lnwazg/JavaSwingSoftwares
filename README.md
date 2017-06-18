@@ -11,7 +11,23 @@ QQ：  914096874
 邮箱: lnwazg@126.com  
 
 
-## 1. AutoShadow 基于java swing的翻墙工具
+## 1. GDict 惊鸿一瞥背单词
+软件特色：  
+1. 内置艾宾浩斯记忆曲线，高效有趣地背单词  
+2. 快捷键PrintScreen一键呼出\关闭  
+3. 中翻英、英翻中、独家配备精美单词插图解释，可视化的记忆，高效自然  
+4. 智能发音、等级称号成就系统，越用你的英文水平就越强大
+
+运行截图如下：  
+![xxx](screenshots/22.png)
+![xxx](screenshots/23.png)
+![xxx](screenshots/21.png)
+
+下载GoogleTranslate-1.3.3.jar，双击运行即可。
+另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
+
+
+## 2. AutoShadow 基于java swing的翻墙工具
 这款小工具可以帮助你有效地翻墙，纯公益目的，仅供广大开发人员方便地查阅英文文献之用，请勿用于商业用途。  
 软件运行截图如下:  
 <img src="screenshots/1.png">
@@ -29,20 +45,7 @@ QQ：  914096874
 8. 打开https://www.youtube.com/ 检测一下你是否可以正常翻墙。如果可以正常打开，说明已经翻墙成功了，have fun！  
  <img src="screenshots/5.png">   
 
-## 2. GoogleTranslate  惊鸿一瞥 背单词神器
-软件特色：  
-1. 内置艾宾浩斯记忆曲线，高效有趣地背单词  
-2. 快捷键PrintScreen一键呼出\关闭  
-3. 中翻英、英翻中、独家配备精美单词插图解释，可视化的记忆，高效自然  
-4. 智能发音、等级称号成就系统，越用你的英文水平就越强大
 
-运行截图如下：  
-![xxx](screenshots/22.png)
-![xxx](screenshots/23.png)
-![xxx](screenshots/21.png)
-
-下载GoogleTranslate-1.3.3.jar，双击运行即可。
-另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
 ## 3. MY_ZOO_SERVER  我的zookeeper服务器
 ### 诞生初衷：
