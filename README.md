@@ -8,7 +8,7 @@ JDK8的下载地址为：http://www.oracle.com/technetwork/java/javase/downloads
 若有疑问或建议，请邮件我，我的联系方式如下：  
 
 QQ：  914096874  
-邮箱: lnwazg@126.com  
+邮箱:  lnwazg@126.com  
 
 
 ## 1. GDict 惊鸿一瞥背单词
