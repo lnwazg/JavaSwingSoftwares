@@ -26,10 +26,6 @@ QQ：  914096874
 下载GDict-1.0.jar，双击运行即可。
 另附详尽的使用说明书《GoogleTranslate用户手册 v1.1.docx》
 
-
-## 2. 占楼待定
-
-
 ## 3. MY_ZOO_SERVER  我的zookeeper服务器
 ### 诞生初衷：
 原本我是想用Java复刻zookeeper，但是复刻的难度太大，随后发现复刻zookeeper的Naming Service功能更加简单易实施。    
